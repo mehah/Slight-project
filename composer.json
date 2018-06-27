@@ -1,0 +1,33 @@
+{
+	"name" : "slight.mvc/project",
+	"description" : "Slight is an MVC framework that will assist you in the development of rest applications, containing tools for routing, authentication and validation for data models.",
+	"keywords" : [
+		"framework",
+		"slight",
+		"light",
+		"rest",
+		"restful",
+		"router",
+		"validation",
+		"authentication",
+		"MVC",
+		"api"
+	],
+	"type" : "project",
+	"license" : "MIT",
+	"version" : "1.0",
+	"authors" : [{
+			"name" : "Renato Machado"
+		}
+	],
+	"minimum-stability" : "dev",
+	"require" : {
+		"php" : ">=7.1.0",
+		"slight.mvc/framework": "dev-master"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"src\\" : "src"
+		}
+	}
+}
