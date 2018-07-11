@@ -18,16 +18,32 @@
 		// UPDATE USER
 		$.ajax({type: 'PUT', url: 'user/10/Gabriel'}).then(addText, addText);
 
-		// TEST RULE
+		// VALIDATION WITH SESSION
 		{
-			$.get('user') // UNAUTHORIZED
+			$.get('user/check/session') // UNAUTHORIZED
 				.then(addText, addText);
 	
-			$.post('user/put/session', user) // PUT USER ON SESSION
+			$.post('user/login/session', user) // PUT USER ON SESSION
 				.then(addText, addText);
 	
-			$.get('user') // NOW IS AUTHORIZED
+			$.get('user/check/session') // NOW IS AUTHORIZED
 				.then(addText,addText);
+		}
+		
+		// VALIDATION WITH JWT
+		{
+			$.get('user/check/jwt') // UNAUTHORIZED
+				.then(addText, addText);
+	
+			$.post('user/login/jwt', user) // TOKEN GENERATED 
+				.then((token) => {
+					addText('Token generated: '+token);
+					
+					$.ajax({ // NOW IS AUTHORIZED
+						url: 'user/check/jwt',
+					    headers: {'Authorization': 'Bearer ' + token}					    
+					}).then(addText, addText);
+				}, addText);
 		}
 	});
 </script>

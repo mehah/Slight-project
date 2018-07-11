@@ -1,17 +1,10 @@
 <?php
 namespace src\controller;
 
-use src\model\User;
-use Slight\http\HttpSession;
 use Slight\validator\Validator;
+use src\model\User;
 
-class UserController  {
-
-	public function init(HttpSession $session) {
-		$session->destroy();
-		
-		return "Hello World!";
-	}
+class UserController {
 
 	public function update($id, $name) {
 		return "User id($id) updated to name: $name";
@@ -31,11 +24,5 @@ class UserController  {
 		}
 		
 		return $msg;
-	}
-
-	public function putOnSession(User $user, HttpSession $session) {
-		$session->setUserPrincipal($user);
-		
-		return "User inserted on session.";
 	}
 }

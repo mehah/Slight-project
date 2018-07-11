@@ -23,7 +23,8 @@
 	"minimum-stability" : "dev",
 	"require" : {
 		"php" : ">=7.1.0",
-		"slight.mvc/framework": "dev-master"
+		"slight.mvc/framework": "dev-master",
+		"firebase/php-jwt": "dev-master"
 	},
 	"autoload" : {
 		"psr-4" : {
