@@ -1,13 +1,14 @@
 <?php
 namespace src\controller;
 
-use Slight\ComponentController;
 use src\model\User;
+use Slight\http\HttpSession;
+use Slight\validator\Validator;
 
-class UserController extends ComponentController {
+class UserController  {
 
-	public function init() {
-		$this->getSession()->destroy();
+	public function init(HttpSession $session) {
+		$session->destroy();
 		
 		return "Hello World!";
 	}
@@ -18,13 +19,13 @@ class UserController extends ComponentController {
 
 	public function insert(User $user) {
 		$msg;
-		if ($this->validate($user)->hasError()) {
+		if (Validator::validate($user)->hasError()) {
 			$msg = 'Name is required.';
 		} else {
 			try {
 				$msg = $user->insert() ? 'User inserted.' : 'Error on insert User.';
 			} catch (\Exception $e) {
-				$this->status(500);
+				http_response_code(500);
 				$msg = $e->getMessage();
 			}
 		}
@@ -32,8 +33,8 @@ class UserController extends ComponentController {
 		return $msg;
 	}
 
-	public function putOnSession(User $user) {
-		$this->getSession()->setUserPrincipal($user);
+	public function putOnSession(User $user, HttpSession $session) {
+		$session->setUserPrincipal($user);
 		
 		return "User inserted on session.";
 	}
